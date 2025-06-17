@@ -21,7 +21,7 @@ export const createTask = async (req: Request, res: Response) => {
         title,
         description,
       },
-    });
+    })
     res.status(201).json(newTask);
   } catch (_e) {
     res.status(500).json({ message: "Something went wrong" });
@@ -35,10 +35,30 @@ export const getSpecificTask = async (req: Request, res: Response) => {
     const specificTask = await client.task.findFirst({
       where: {
         id,
-      },
-    });
+      }
+    })
     res.status(200).json(specificTask);
-  } catch (e) {
+  } catch (_e) {
+    res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
+// Update a specific task with Id
+export const updateSpecificTask =  async (req: Request, res: Response) => {
+  try {
+    const { title, description }: Task = req.body;
+    const { id } = req.params;
+    const updatedTask = await client.task.update({
+      where: {
+        id,
+      },
+      data: {
+        title,
+        description
+      }
+    })
+    res.status(200).json(updatedTask);
+  } catch (_e) {
     res.status(500).json({ message: "Something went wrong" });
   }
 };
