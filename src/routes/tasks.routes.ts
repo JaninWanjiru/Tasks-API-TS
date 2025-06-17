@@ -6,7 +6,7 @@ import {
   getSpecificTask,
   updateSpecificTask,
 } from "../controllers/tasks.controller";
-import { validateTask } from "../middlewares/validatetask";
+import { validateTask } from "../middlewares/validateTask";
 const router = Router();
 
 router.get("/", getAllTasks);
