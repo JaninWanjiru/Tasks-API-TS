@@ -4,6 +4,7 @@ import {
   getAllTasks,
   getSpecificTask,
   updateSpecificTask,
+  deleteTask,
 } from "./controllers/tasks.controller";
 
 const app = express();
@@ -18,6 +19,7 @@ app.get("/tasks", getAllTasks);
 app.post("/tasks", createTask);
 app.get("/tasks/:id", getSpecificTask);
 app.patch("/tasks/:id", updateSpecificTask);
+app.delete("/tasks/:id", deleteTask);
 
 const port = process.env.PORT || 5500;
 app.listen(port, () => console.log(`App running on port ${port}`));

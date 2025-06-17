@@ -6,7 +6,7 @@ const client = new PrismaClient();
 export const getAllTasks = async (_req: Request, res: Response) => {
   try {
     const tasks = await client.task.findMany();
-    res.status(200).json(tasks);
+    res.status(200).json({message: "All tasks fetched successfully", tasks});
   } catch (_e) {
     res.status(500).json({ message: "Something went wrong" });
   }
@@ -22,7 +22,7 @@ export const createTask = async (req: Request, res: Response) => {
         description,
       },
     })
-    res.status(201).json(newTask);
+    res.status(201).json({message: "Task created successfully", newTask});
   } catch (_e) {
     res.status(500).json({ message: "Something went wrong" });
   }
@@ -37,7 +37,7 @@ export const getSpecificTask = async (req: Request, res: Response) => {
         id,
       }
     })
-    res.status(200).json(specificTask);
+    res.status(200).json( {message: "Task fetched successfully", specificTask});
   } catch (_e) {
     res.status(500).json({ message: "Something went wrong" });
   }
@@ -57,7 +57,22 @@ export const updateSpecificTask =  async (req: Request, res: Response) => {
         description
       }
     })
-    res.status(200).json(updatedTask);
+    res.status(200).json({message: "Task updated successfully", updatedTask});
+  } catch (_e) {
+    res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
+// Delete a task
+export const deleteTask = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const deletedTask = await client.task.delete({
+      where: {
+        id
+      },
+    })
+    res.status(200).json({message: "Task deleted successfully", deletedTask});
   } catch (_e) {
     res.status(500).json({ message: "Something went wrong" });
   }
