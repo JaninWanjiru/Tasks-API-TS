@@ -17,15 +17,16 @@ Here is a simple RESTful API for managing tasks. It has been built with **TypeSc
 - **ORM**: Prisma
 - **Database**: PostgreSQL
 
-
 ## How to install and setup
 
 ### 1. Clone the repo
+
 ```bash
 git clone https://github.com/JaninWanjiru/Tasks-API-TS.git
 ```
 
 ### 2. Install dependancies
+
 ```bash
 npm init -y
 npm i express
@@ -34,15 +35,17 @@ npx tsc --init
 npm i -D @types/express
 npx prisma init --init datasource-provider postgresql
 ```
+
 ### 3. Create your model in prisma/schema.prisma file
 
-
 ### 4. Run database migrations
+
 ```bash
 npx prisma migrate dev --name init
 ```
 
 ### 5. Start the server
+
 ```bash
 npm run dev
 ```
@@ -61,6 +64,6 @@ npm run dev
 
 6. DELETE `/tasks/:id` - deletes a task given its Id.
 
-### N/B: 
-- You must have PostgreSQL installed and running.
+### N/B:
 
+- You must have PostgreSQL installed and running.

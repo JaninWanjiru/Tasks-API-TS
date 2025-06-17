@@ -6,7 +6,7 @@ const client = new PrismaClient();
 export const getAllTasks = async (_req: Request, res: Response) => {
   try {
     const tasks = await client.task.findMany();
-    res.status(200).json({message: "All tasks fetched successfully", tasks});
+    res.status(200).json({ message: "All tasks fetched successfully", tasks });
   } catch (_e) {
     res.status(500).json({ message: "Something went wrong" });
   }
@@ -21,8 +21,8 @@ export const createTask = async (req: Request, res: Response) => {
         title,
         description,
       },
-    })
-    res.status(201).json({message: "Task created successfully", newTask});
+    });
+    res.status(201).json({ message: "Task created successfully", newTask });
   } catch (_e) {
     res.status(500).json({ message: "Something went wrong" });
   }
@@ -35,16 +35,18 @@ export const getSpecificTask = async (req: Request, res: Response) => {
     const specificTask = await client.task.findFirst({
       where: {
         id,
-      }
-    })
-    res.status(200).json( {message: "Task fetched successfully", specificTask});
+      },
+    });
+    res
+      .status(200)
+      .json({ message: "Task fetched successfully", specificTask });
   } catch (_e) {
     res.status(500).json({ message: "Something went wrong" });
   }
 };
 
 // Update a specific task with Id
-export const updateSpecificTask =  async (req: Request, res: Response) => {
+export const updateSpecificTask = async (req: Request, res: Response) => {
   try {
     const { title, description }: Task = req.body;
     const { id } = req.params;
@@ -54,10 +56,10 @@ export const updateSpecificTask =  async (req: Request, res: Response) => {
       },
       data: {
         title,
-        description
-      }
-    })
-    res.status(200).json({message: "Task updated successfully", updatedTask});
+        description,
+      },
+    });
+    res.status(200).json({ message: "Task updated successfully", updatedTask });
   } catch (_e) {
     res.status(500).json({ message: "Something went wrong" });
   }
@@ -69,10 +71,10 @@ export const deleteTask = async (req: Request, res: Response) => {
     const { id } = req.params;
     const deletedTask = await client.task.delete({
       where: {
-        id
+        id,
       },
-    })
-    res.status(200).json({message: "Task deleted successfully", deletedTask});
+    });
+    res.status(200).json({ message: "Task deleted successfully", deletedTask });
   } catch (_e) {
     res.status(500).json({ message: "Something went wrong" });
   }
