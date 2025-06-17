@@ -1,11 +1,5 @@
 import express from "express";
-import {
-  createTask,
-  getAllTasks,
-  getSpecificTask,
-  updateSpecificTask,
-  deleteTask,
-} from "./controllers/tasks.controller";
+import tasksRouter from './routes/tasks.routes'
 
 const app = express();
 
@@ -15,11 +9,7 @@ app.get("/", (_req, res) => {
   res.send("<h1>You've unlocked the Tasks API in Ts and Express</h1> ");
 });
 
-app.get("/tasks", getAllTasks);
-app.post("/tasks", createTask);
-app.get("/tasks/:id", getSpecificTask);
-app.patch("/tasks/:id", updateSpecificTask);
-app.delete("/tasks/:id", deleteTask);
+app.use("/tasks", tasksRouter)
 
 const port = process.env.PORT || 5500;
 app.listen(port, () => console.log(`App running on port ${port}`));
